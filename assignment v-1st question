@@ -1,0 +1,97 @@
+import random
+
+# Production output per unit
+output = [10, 15, 20]
+
+# Operational cost per unit
+cost = [50, 70, 100]
+
+# Maximum production quantity
+max_quantity = 100
+
+# Available budget
+budget = 15000
+
+# Population size
+population_size = 5
+
+# Generate random chromosome
+def generate_chromosome():
+    return [
+        random.randint(0, max_quantity)
+        for i in range(3)
+    ]
+
+# Generate initial population
+def generate_population():
+    population = []
+
+    for i in range(population_size):
+        chromosome = generate_chromosome()
+        population.append(chromosome)
+
+    return population
+
+# Calculate production output
+def calculate_output(chromosome):
+    total = sum(
+        chromosome[i] * output[i]
+        for i in range(3)
+    )
+    return total
+
+# Calculate operational cost
+def calculate_cost(chromosome):
+    total = sum(
+        chromosome[i] * cost[i]
+        for i in range(3)
+    )
+    return total
+
+# Calculate fitness
+def fitness(chromosome):
+    production = calculate_output(chromosome)
+    expense = calculate_cost(chromosome)
+
+    if expense > budget:
+        return 0
+
+    if expense == 0:
+        return 0
+
+    return production / expense
+
+# Main program
+population = generate_population()
+
+print("PRODUCTION PLANNING OPTIMIZATION")
+print("--------------------------------")
+
+print("\nInitial Population and Fitness Values:\n")
+
+for i, chromosome in enumerate(population):
+
+    production = calculate_output(chromosome)
+    expense = calculate_cost(chromosome)
+    fit = fitness(chromosome)
+
+    print("Chromosome", i + 1, ":", chromosome)
+    print("Production Output:", production)
+    print("Operational Cost: Rs.", expense)
+    print("Fitness Value:", round(fit, 4))
+
+    if expense > budget:
+        print("Status: Budget Exceeded")
+    else:
+        print("Status: Valid Production Plan")
+
+    print("--------------------------------")
+
+# Find the best chromosome in initial population
+best = max(population, key=fitness)
+
+print("\nBest Production Plan:")
+print("Chromosome:", best)
+print("Production Output:", calculate_output(best))
+print("Operational Cost: Rs.", calculate_cost(best))
+print("Fitness Value:", round(fitness(best), 4))
