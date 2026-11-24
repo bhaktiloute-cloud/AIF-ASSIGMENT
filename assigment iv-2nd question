@@ -1,0 +1,20 @@
+# Define two fuzzy sets
+A = [0.2, 0.5, 0.8, 0.6]
+B = [0.7, 0.4, 0.3, 0.9]
+
+# 1. Union (Maximum operation)
+union = [max(A[i], B[i]) for i in range(len(A))]
+
+# 2. Intersection (Minimum operation)
+intersection = [min(A[i], B[i]) for i in range(len(A))]
+
+# 3. Complement of A (1 - membership value)
+complement = [1 - A[i] for i in range(len(A))]
+
+# Display results
+print("Fuzzy Set A:", A)
+print("Fuzzy Set B:", B)
+
+print("\nUnion (A U B):", union)
+print("Intersection (A ∩ B):", intersection)
+print("Complement of A:", complement)
