@@ -1,0 +1,34 @@
+# Student Performance Evaluation Using Fuzzy Sets
+
+attendance = [0.9, 0.6, 0.4]
+assignments = [0.8, 0.9, 0.5]
+examination = [0.7, 0.5, 0.9]
+
+students = ["Student A", "Student B", "Student C"]
+
+print("STUDENT PERFORMANCE EVALUATION")
+print("--------------------------------")
+
+for i in range(3):
+
+    # Union
+    union = max(
+        attendance[i],
+        assignments[i],
+        examination[i]
+    )
+
+    # Intersection
+    intersection = min(
+        attendance[i],
+        assignments[i],
+        examination[i]
+    )
+
+    # Complement of attendance
+    complement = 1 - attendance[i]
+
+    print("\n", students[i])
+    print("Union:", round(union, 2))
+    print("Intersection:", round(intersection, 2))
+    print("Complement:", round(complement, 2))
